@@ -1,0 +1,35 @@
+name: Terraform Plan
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name if different
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.11  # Specify your desired Terraform version
+      
+    - name: Terraform Init
+      run: terraform init
+      
+    - name: Terraform Validate
+      run: terraform validate
+      
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+      
+    # Optionally, you may want to store the plan file as an artifact
+    - name: Archive Terraform Plan
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: tfplan
+        path: tfplan
