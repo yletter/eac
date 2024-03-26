@@ -4,16 +4,15 @@ on:
   push:
     branches:
       - main  # Change this to your main branch name if different
+env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2 
-    - name: S3 List
-      run: |
-        aws s3 ls
+    - name: AWS 
+      run: aws s3 ls
