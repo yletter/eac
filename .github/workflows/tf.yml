@@ -13,12 +13,14 @@ jobs:
       uses: actions/checkout@v2 
     - name: S3 List
       run: |
-        aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY }}
-        aws configure set aws_secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
-        aws configure set default.region us-east-1
-        aws configure set default.profile default
         echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
         echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
         echo "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" >> $GITHUB_ENV
         echo "AWS_PROFILE=${AWS_PROFILE}" >> $GITHUB_ENV
+        cat $GITHUB_ENV
+        aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY }}
+        aws configure set aws_secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+        aws configure set default.region us-east-1
+        aws configure set default.profile default
+
         aws s3 ls --profile default
