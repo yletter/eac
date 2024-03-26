@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main  # Change this to your main branch name if different
-env:
-    AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
 
 jobs:
   terraform:
@@ -14,5 +11,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
     - name: AWS 
       run: aws s3 ls
