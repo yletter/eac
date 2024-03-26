@@ -21,3 +21,4 @@ jobs:
         role-duration-seconds: 120
     - name: AWS 
       run: aws s3 ls
+      shell: bash
