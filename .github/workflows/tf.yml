@@ -18,7 +18,7 @@ jobs:
         echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
         echo "AWS_PROFILE=default" >> $GITHUB_ENV
         cat $GITHUB_ENV
-        aws configure set aws_access_key_id 1234
+        aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY }}
         aws configure set aws_secret_access_key 12
         aws configure set default.region us-east-1
         aws configure set default.profile default
