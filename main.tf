@@ -62,7 +62,7 @@ resource "aws_instance" "my_ec2_instance" {
   ami                    = "ami-0c101f26f147fa7fd"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.my_subnet.id
-  security_groups        = [aws_security_group.my_security_group.name]
+  security_groups        = [aws_security_group.my_security_group.id]
   key_name               = "eac"
   associate_public_ip_address = true
 
