@@ -41,7 +41,7 @@ jobs:
       run: terraform plan -out=tfplan
 
     - name: Terraform Plan
-      run: terraform apply --auto-approve -out=tfapply
+      run: terraform apply --auto-approve
 
     - name: Archive Terraform Plan
       if: always()
@@ -49,10 +49,3 @@ jobs:
       with:
         name: tfplan
         path: tfplan
-
-    - name: Archive Terraform Apply
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: tfapply
-        path: tfapply
