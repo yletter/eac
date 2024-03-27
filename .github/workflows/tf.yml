@@ -28,8 +28,8 @@ jobs:
     - name: AWS 
       shell: bash
       run: |
-      env
-      aws s3 ls
+        env
+        aws s3 ls
 
     - name: Terraform Init
       run: terraform init
