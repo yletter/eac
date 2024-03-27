@@ -40,7 +40,7 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -out=tfplan
 
-    - name: Terraform Plan
+    - name: Terraform Apply
       run: terraform apply --auto-approve
 
     - name: Archive Terraform Plan

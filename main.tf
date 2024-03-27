@@ -38,6 +38,8 @@ resource "aws_route_table_association" "subnet_assoc" {
 
 # Create Security Group
 resource "aws_security_group" "my_security_group" {
+
+  name = "my_security_group"
   vpc_id = aws_vpc.my_vpc.id
 
   ingress {
