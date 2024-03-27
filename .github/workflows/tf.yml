@@ -26,10 +26,10 @@ jobs:
         aws-region: us-east-1
 
     - name: AWS 
+      shell: bash
       run: |
       env
       aws s3 ls
-      shell: bash
 
     - name: Terraform Init
       run: terraform init
