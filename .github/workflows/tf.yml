@@ -13,6 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.11
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -23,3 +28,19 @@ jobs:
     - name: AWS 
       run: aws s3 ls
       shell: bash
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+
+    - name: Archive Terraform Plan
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: tfplan
+        path: tfplan
