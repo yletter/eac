@@ -1,5 +1,9 @@
 name: Terraform Destroy
 
+on:
+  repository_dispatch:
+    types: [trigger-workflow]
+    
 jobs:
   terraform:
     runs-on: ubuntu-latest
