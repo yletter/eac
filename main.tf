@@ -65,8 +65,47 @@ resource "aws_instance" "my_ec2_instance" {
   security_groups        = [aws_security_group.my_security_group.id]
   key_name               = "eac"
   associate_public_ip_address = true
-
+  iam_instance_profile = aws_iam_role.ec2_s3_role.name
   tags = {
     Name = "MyEC2Instance"
   }
+}
+
+# Define IAM policy granting full access to S3
+resource "aws_iam_policy" "s3_full_access_policy" {
+  name        = "s3-full-access-policy"
+  description = "Policy granting full access to S3"
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect"    : "Allow",
+        "Action"    : "s3:*",
+        "Resource"  : "*"
+      }
+    ]
+  })
+}
+
+# Create IAM role and attach the S3 full access policy
+resource "aws_iam_role" "ec2_s3_role" {
+  name               = "ec2-s3-role"
+  assume_role_policy = jsonencode({
+    "Version"               : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect"    : "Allow",
+        "Principal" : {
+          "Service" : "ec2.amazonaws.com"
+        },
+        "Action"    : "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_s3_role_policy_attachment" {
+  role       = aws_iam_role.ec2_s3_role.name
+  policy_arn = aws_iam_policy.s3_full_access_policy.arn
 }
