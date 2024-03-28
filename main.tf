@@ -65,7 +65,14 @@ resource "aws_instance" "my_ec2_instance" {
   security_groups        = [aws_security_group.my_security_group.id]
   key_name               = "eac"
   associate_public_ip_address = true
-  iam_instance_profile = aws_iam_role.ec2_s3_role.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_s3_profile.name
+
+  user_data = <<-EOF
+              #!/bin/bash
+              echo "Hello, World!" > /tmp/hello.txt
+              # Add more initialization commands here
+              EOF
+
   tags = {
     Name = "MyEC2Instance"
   }
@@ -105,6 +112,10 @@ resource "aws_iam_role" "ec2_s3_role" {
   })
 }
 
+resource "aws_iam_instance_profile" "ec2_s3_profile" {
+  name = "ec2_s3_profile"
+  role = aws_iam_role.ec2_s3_role.name
+}
 resource "aws_iam_role_policy_attachment" "ec2_s3_role_policy_attachment" {
   role       = aws_iam_role.ec2_s3_role.name
   policy_arn = aws_iam_policy.s3_full_access_policy.arn
