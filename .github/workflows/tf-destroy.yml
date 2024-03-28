@@ -2,7 +2,7 @@ name: Terraform Destroy
 
 on:
   repository_dispatch:
-    types: [trigger-workflow]
+    types: [trigger-destroy]
     
 jobs:
   terraform:
