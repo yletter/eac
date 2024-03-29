@@ -79,8 +79,10 @@ resource "aws_instance" "my_ec2_instance" {
               echo "Hello, World!" > /tmp/hello.txt
               # Add more initialization commands here
               aws s3 cp s3://yletter-artifacts/config-server.jar /tmp/
+              aws s3 cp s3://yletter-artifacts/config-client.jar /tmp/
               sudo yum install java-17-amazon-corretto-headless -y
-              java -jar /tmp/config-server.jar > /tmp/out.txt &
+              java -jar /tmp/config-server.jar > /tmp/config.server.out.txt &
+              java -jar /tmp/config-client.jar > /tmp/config.client.out.txt &
               EOF
 
   tags = {
