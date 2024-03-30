@@ -102,6 +102,11 @@ resource "aws_iam_policy" "s3_full_access_policy" {
         "Effect"    : "Allow",
         "Action"    : "s3:*",
         "Resource"  : "*"
+      },
+      {
+        "Effect"    : "Allow",
+        "Action"    : "codeCommit:*",
+        "Resource"  : "*"
       }
     ]
   })
