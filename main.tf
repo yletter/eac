@@ -91,8 +91,8 @@ resource "aws_instance" "my_ec2_instance" {
 }
 
 # Define IAM policy granting full access to S3
-resource "aws_iam_policy" "s3_full_access_policy" {
-  name        = "s3-full-access-policy"
+resource "aws_iam_policy" "s3_cc_full_access_policy" {
+  name        = "s3-cc-full-access-policy"
   description = "Policy granting full access to S3"
 
   policy = jsonencode({
@@ -113,8 +113,8 @@ resource "aws_iam_policy" "s3_full_access_policy" {
 }
 
 # Create IAM role and attach the S3 full access policy
-resource "aws_iam_role" "ec2_s3_role" {
-  name               = "ec2-s3-role"
+resource "aws_iam_role" "ec2_s3_cc_role" {
+  name               = "ec2-s3-cc-role"
   assume_role_policy = jsonencode({
     "Version"               : "2012-10-17",
     "Statement" : [
@@ -131,9 +131,9 @@ resource "aws_iam_role" "ec2_s3_role" {
 
 resource "aws_iam_instance_profile" "ec2_s3_profile" {
   name = "ec2_s3_profile"
-  role = aws_iam_role.ec2_s3_role.name
+  role = aws_iam_role.ec2_s3_cc_role.name
 }
-resource "aws_iam_role_policy_attachment" "ec2_s3_role_policy_attachment" {
-  role       = aws_iam_role.ec2_s3_role.name
-  policy_arn = aws_iam_policy.s3_full_access_policy.arn
+resource "aws_iam_role_policy_attachment" "ec2_s3_cc_role_policy_attachment" {
+  role       = aws_iam_role.ec2_s3_cc_role.name
+  policy_arn = aws_iam_policy.s3_cc_full_access_policy.arn
 }
