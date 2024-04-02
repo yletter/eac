@@ -223,30 +223,12 @@ resource "aws_iam_service_linked_role" "es_service_linked_role" {
 
 data "aws_caller_identity" "current" {}
 
-resource "aws_opensearch_domain" "es" {
+resource "aws_opensearch_service_domain" "es" {
   count = var.create_resource ? 1 : 0
   domain_name = "yuvaraj-es-domain"
-  elasticsearch_version = "7.10"
-
-  cluster_config {
-      instance_count = 3
-      instance_type = "r6g.large.elasticsearch"
-      zone_awareness_enabled = true
-      zone_awareness_config {
-        availability_zone_count = 3
-      }
-  }
-
-  vpc_options {
-      subnet_ids = [
-        aws_subnet.private_1.id,
-        aws_subnet.private_2.id,
-        aws_subnet.private_3.id
-      ]
-      security_group_ids = [
-          aws_security_group.es.id
-      ]
-  }
+  elasticsearch_version = "2.10"
+  cluster_instance_type = "r6g.large.elasticsearch"
+  zone_awareness_enabled = false
 
   ebs_options {
       ebs_enabled = true
