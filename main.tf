@@ -226,7 +226,7 @@ data "aws_caller_identity" "current" {}
 resource "aws_opensearch_domain" "es" {
   count = var.create_resource ? 1 : 0
   domain_name = "yuvaraj-es-domain"
-  elasticsearch_version = "2.10"
+  engine_version = "OpenSearch_2.10"
   cluster_instance_type = "r6g.large.elasticsearch"
   zone_awareness_enabled = false
 
