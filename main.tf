@@ -223,7 +223,7 @@ resource "aws_iam_service_linked_role" "es_service_linked_role" {
 
 data "aws_caller_identity" "current" {}
 
-resource "aws_opensearch_service_domain" "es" {
+resource "aws_opensearch_domain" "es" {
   count = var.create_resource ? 1 : 0
   domain_name = "yuvaraj-es-domain"
   elasticsearch_version = "2.10"
