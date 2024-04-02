@@ -3,6 +3,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "create_resource" {
+  type = bool
+  default = false
+}
+
 # Create VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -219,6 +224,7 @@ resource "aws_iam_service_linked_role" "es_service_linked_role" {
 data "aws_caller_identity" "current" {}
 
 resource "aws_elasticsearch_domain" "es" {
+  count = var.create_resource ? 1 : 0
   domain_name = "yuvaraj-es-domain"
   elasticsearch_version = "7.10"
 
@@ -300,6 +306,7 @@ resource "aws_security_group" "my_security_group" {
 
 # Create EC2 instance
 resource "aws_instance" "my_ec2_instance" {
+  count = var.create_resource ? 1 : 0
   ami                    = "ami-0c101f26f147fa7fd"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public_subnet0.id
