@@ -227,9 +227,12 @@ resource "aws_opensearch_domain" "es" {
   count = var.create_resource ? 1 : 0
   domain_name = "yuvaraj-es-domain"
   engine_version = "OpenSearch_1.0"
-  cluster_instance_type = "r6g.large.elasticsearch"
-  zone_awareness_enabled = false
 
+  cluster_config {
+    instance_type = "r6g.large.search"
+    zone_awareness_enabled = false
+  }
+  
   ebs_options {
       ebs_enabled = true
       volume_size = 10
