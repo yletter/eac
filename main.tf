@@ -5,7 +5,7 @@ provider "aws" {
 
 variable "create_resource" {
   type = bool
-  default = false
+  default = true
 }
 
 # Create VPC
