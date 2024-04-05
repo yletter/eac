@@ -251,7 +251,7 @@ resource "aws_opensearch_domain" "es" {
   }
 
   advanced_security_options {
-    enabled = true;
+    enabled = true
     master_user_options {
       master_user_name     = "master"
       master_user_password = "master"
