@@ -254,7 +254,7 @@ resource "aws_opensearch_domain" "es" {
     enabled = true
     master_user_options {
       master_user_name     = "master"
-      master_user_password = "master"
+      master_user_password = "masteryuvaraj"
     }
   }
 
