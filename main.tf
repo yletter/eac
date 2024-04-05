@@ -258,6 +258,10 @@ resource "aws_opensearch_domain" "es" {
     }
   }
 
+  encrypt_at_rest {
+    enabled = true
+  }
+
   access_policies = <<CONFIG
 {
   "Version": "2012-10-17",
