@@ -202,6 +202,18 @@ resource "aws_route_table_association" "private_3" {
     route_table_id = aws_route_table.private_3.id
 }
 
+resource "random_password" "password" {
+  length  = 32
+  special = true
+}
+
+resource "aws_ssm_parameter" "opensearch_master_user" {
+  name        = "/service/MASTER_USER"
+  description = "opensearch_password for my service domain"
+  type        = "SecureString"
+  value       = "master,${random_password.password.result}"
+}
+
 resource "aws_security_group" "es" {
   name = "es-sg"
   description = "Allow inbound traffic to ElasticSearch from VPC CIDR"
@@ -239,6 +251,7 @@ resource "aws_opensearch_domain" "es" {
   }
 
   advanced_security_options {
+    enabled = true;
     master_user_options {
       master_user_name     = "master"
       master_user_password = "master"
