@@ -238,6 +238,13 @@ resource "aws_opensearch_domain" "es" {
       volume_size = 10
   }
 
+  advanced_security_options {
+    master_user_options {
+      master_user_name     = "master"
+      master_user_password = "master"
+    }
+  }
+
   access_policies = <<CONFIG
 {
   "Version": "2012-10-17",
