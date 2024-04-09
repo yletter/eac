@@ -256,7 +256,7 @@ resource "aws_opensearch_domain" "es" {
     #anonymous_auth_enabled         = true
     master_user_options {
       master_user_name     = "master"
-      master_user_password = "Master@yuvaraj"
+      master_user_password = "Master@13579yuvaraj"
     }
   }
 
