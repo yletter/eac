@@ -262,6 +262,10 @@ resource "aws_opensearch_domain" "es" {
     enabled = true
   }
 
+  node_to_node_encryption {
+    enabled = true
+  }
+  
   access_policies = <<CONFIG
 {
   "Version": "2012-10-17",
