@@ -10,7 +10,7 @@ variable "create_resource" {
 
 variable "create_nat_resource" {
   type = bool
-  default = true
+  default = false
 }
 
 # Create VPC
