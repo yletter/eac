@@ -8,6 +8,11 @@ variable "create_resource" {
   default = true
 }
 
+variable "create_nat_resource" {
+  type = bool
+  default = true
+}
+
 # Create VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -122,33 +127,40 @@ resource "aws_subnet" "private_3" {
 }
 
 resource "aws_eip" "nat_gw_eip_1" {
+  count = var.create_nat_resource ? 1 : 0
   domain = "vpc"
 }
 
 resource "aws_eip" "nat_gw_eip_2" {
+  count = var.create_nat_resource ? 1 : 0
   domain = "vpc"
 }
 
 resource "aws_eip" "nat_gw_eip_3" {
+  count = var.create_nat_resource ? 1 : 0
   domain = "vpc"
 }
 
 resource "aws_nat_gateway" "gw_1" {
+  count = var.create_nat_resource ? 1 : 0
   allocation_id = aws_eip.nat_gw_eip_1.id
   subnet_id     = aws_subnet.public_1.id
 }
 
 resource "aws_nat_gateway" "gw_2" {
+  count = var.create_nat_resource ? 1 : 0
   allocation_id = aws_eip.nat_gw_eip_2.id
   subnet_id     = aws_subnet.public_2.id
 }
 
 resource "aws_nat_gateway" "gw_3" {
+  count = var.create_nat_resource ? 1 : 0
   allocation_id = aws_eip.nat_gw_eip_3.id
   subnet_id     = aws_subnet.public_3.id
 }
 
 resource "aws_route_table" "private_1" {
+    count = var.create_nat_resource ? 1 : 0
     vpc_id = aws_vpc.my_vpc.id
 
     route {
@@ -162,6 +174,7 @@ resource "aws_route_table" "private_1" {
 }
 
 resource "aws_route_table" "private_2" {
+    count = var.create_nat_resource ? 1 : 0
     vpc_id = aws_vpc.my_vpc.id
 
     route {
@@ -175,6 +188,7 @@ resource "aws_route_table" "private_2" {
 }
 
 resource "aws_route_table" "private_3" {
+    count = var.create_nat_resource ? 1 : 0
     vpc_id = aws_vpc.my_vpc.id
 
     route {
@@ -188,16 +202,19 @@ resource "aws_route_table" "private_3" {
 }
 
 resource "aws_route_table_association" "private_1" {
+    count = var.create_nat_resource ? 1 : 0
     subnet_id = aws_subnet.private_1.id
     route_table_id = aws_route_table.private_1.id
 }
 
 resource "aws_route_table_association" "private_2" {
+    count = var.create_nat_resource ? 1 : 0
     subnet_id = aws_subnet.private_2.id
     route_table_id = aws_route_table.private_2.id
 }
 
 resource "aws_route_table_association" "private_3" {
+    count = var.create_nat_resource ? 1 : 0
     subnet_id = aws_subnet.private_3.id
     route_table_id = aws_route_table.private_3.id
 }
