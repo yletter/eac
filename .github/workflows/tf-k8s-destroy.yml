@@ -1,7 +1,7 @@
 name: Terraform K8s Destroy
 on:
   repository_dispatch:
-    types: [trigger-destroy]
+    types: [trigger-k8s-destroy]
     
 jobs:
   terraform:

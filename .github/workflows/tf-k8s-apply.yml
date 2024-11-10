@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Change this to your main branch name if different
   repository_dispatch:
-    types: [trigger-apply]
+    types: [trigger-k8s-apply]
     
 jobs:
   terraform:
