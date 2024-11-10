@@ -1,5 +1,5 @@
 name: Terraform Destroy
-
+xx
 on:
   repository_dispatch:
     types: [trigger-destroy]
