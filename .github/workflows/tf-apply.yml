@@ -3,7 +3,7 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - main2  # Change this to your main branch name if different
+      - main2_old  # Change this to your main branch name if different
   repository_dispatch:
     types: [trigger-apply]
     
