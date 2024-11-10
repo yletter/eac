@@ -8,7 +8,7 @@ resource "aws_instance" "master-node" {
 
   key_name = "keypairNov2024" # Replace with your key pair name
 
-  security_groups = [aws_security_group.allow_ssh.id]
+  vpc_security_groups_ids = [aws_security_group.allow_ssh.id]
 }
 
 resource "aws_security_group" "allow_ssh" {
