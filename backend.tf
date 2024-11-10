@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "pradeepa-app"
+    bucket = "k8s-yuvaraj"
     region = "us-east-1"
     key = "eac/terraform.tfstate"
     profile = "saml"
