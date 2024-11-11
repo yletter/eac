@@ -1,15 +1,33 @@
 resource "aws_instance" "master-node" {
   ami           = "ami-005fc0f236362e99f" # Replace with your desired AMI ID
   instance_type = "t2.micro"
-
   tags = {
     Name = "master"
   }
-
   iam_instance_profile = aws_iam_instance_profile.ec2_ssm_instance_profile.name
-
   key_name = "keypairNov2024" # Replace with your key pair name
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+}
 
+resource "aws_instance" "worker1" {
+  ami           = "ami-005fc0f236362e99f" # Replace with your desired AMI ID
+  instance_type = "t2.micro"
+  tags = {
+    Name = "worker1"
+  }
+  iam_instance_profile = aws_iam_instance_profile.ec2_ssm_instance_profile.name
+  key_name = "keypairNov2024" # Replace with your key pair name
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+}
+
+resource "aws_instance" "worker2" {
+  ami           = "ami-005fc0f236362e99f" # Replace with your desired AMI ID
+  instance_type = "t2.micro"
+  tags = {
+    Name = "worker2"
+  }
+  iam_instance_profile = aws_iam_instance_profile.ec2_ssm_instance_profile.name
+  key_name = "keypairNov2024" # Replace with your key pair name
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 }
 
