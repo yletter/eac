@@ -1,5 +1,6 @@
 name: Terraform K8s Destroy
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [trigger-k8s-destroy]
     
